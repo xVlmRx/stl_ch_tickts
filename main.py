@@ -22,6 +22,8 @@ def ticket_comments(ticket_id="no_tickets_id"):
 
 if __name__ == '__main__':
     for tickets in get_from_api().get('items', "Can't find key in dictionary"):
-        if tickets.get('is_client_author') == False and tickets.get('is_client_read') == True:
+        if tickets.get('is_client_author') == False and tickets.get('is_client_read') == False:
             print("ID тикета:", tickets.get('number'), "\n", "Тема тикета:", tickets.get('summary'), "\n--- --- --- --- ---\nКомментарии к тикету:\n--- --- --- --- ---\n", ticket_comments(str(tickets.get('number'))))
             print("*** *** *** *** ***")
+        else:
+            print("OK")
