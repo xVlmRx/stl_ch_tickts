@@ -3,7 +3,7 @@ import json
 from prettytable import PrettyTable
 
 url = 'https://api.selectel.ru/support/tickets'
-headers = {'X-Token': '7kUdYIQXjZfXt9APcikQyQKS9_20413',
+headers = {'X-Token': 'API key',
            'Content-Type': 'application/json'}
 query_params = {"only_opened": "True", "page": "1"}
 table_ticket_id = PrettyTable()
