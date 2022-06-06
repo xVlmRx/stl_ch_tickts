@@ -2,7 +2,7 @@ import requests
 import json
 from prettytable import PrettyTable
 
-api_key = "gBdBXfw2YirQ90kLy2kqtDhWF_20413"
+api_key = "API_key"
 url = 'https://api.selectel.ru/support/tickets'
 headers = {'X-Token': api_key,
            'Content-Type': 'application/json'}
@@ -15,10 +15,20 @@ tickets_list = []
 
 
 def get_from_api(ticket_id_get="no_tickets_id"):
-    if ticket_id_get == "no_tickets_id":
-        return requests.get(url, headers=headers, params=query_params).json()
-    else:
-        return requests.get('{}/{}/comments'.format(url, ticket_id_get), headers=headers).json()
+    try:
+        if ticket_id_get == "no_tickets_id":
+            return requests.get(url, headers=headers, params=query_params).json()
+        else:
+            return requests.get('{}/{}/comments'.format(url, ticket_id_get), headers=headers).json()
+        requests.raise_for_status()
+    except requests.exceptions.HTTPError as errh:
+        print("Http Error:", errh)
+    except requests.exceptions.ConnectionError as errc:
+        print("Error Connecting:", errc)
+    except requests.exceptions.Timeout as errt:
+        print("Timeout Error:", errt)
+    except requests.exceptions.RequestException as err:
+        print("OOps: Something Else", err)
 
 
 def ticket_comments(ticket_id="no_tickets_id"):
