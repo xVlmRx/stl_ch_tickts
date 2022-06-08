@@ -6,11 +6,12 @@ api_key = "API_key"
 url = 'https://api.selectel.ru/support/tickets'
 headers = {'X-Token': api_key,
            'Content-Type': 'application/json'}
-query_params = {"only_opened": "True", "page": "1"}
-table_ticket_id = PrettyTable()
-table_ticket_subject = PrettyTable()
-table_ticket_comments = PrettyTable()
-table_comments = PrettyTable()
+query_params = {"only_opened": "True",
+                "page": "1"}
+#table_ticket_id = PrettyTable()
+#table_ticket_subject = PrettyTable()
+#table_ticket_comments = PrettyTable()
+#table_comments = PrettyTable()
 tickets_list = []
 comments_list = []
 
@@ -39,7 +40,7 @@ def ticket_comments(ticket_id="no_tickets_id"):
 
 if __name__ == '__main__':
     for tickets in get_from_api().get('items', "Can't find key in dictionary"):
-        if tickets.get('is_client_author') is False and tickets.get('is_client_read') == False:
+        if tickets.get('is_client_author') is False and tickets.get('is_client_read') is False:
             # table_comments.field_names = ["Field name", "Data"]
             # table_comments.add_row(["ID тикета:", tickets.get('number')])
             # table_comments.add_row(["Тема тикета:", tickets.get('summary')])
